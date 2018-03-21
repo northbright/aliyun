@@ -181,8 +181,8 @@ func (sms *SMS) Send(phoneNumbers []string, signName, templateCode, templatePara
 		return false, nil, err
 	}
 
-	if response.Code == "OK" {
-		return true, response, nil
+	if strings.ToUpper(response.Code) != "OK" {
+		return false, response, nil
 	}
-	return false, response, nil
+	return true, response, nil
 }

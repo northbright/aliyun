@@ -26,6 +26,15 @@ func Example() {
 
 	// Load config from file.
 	// You may rename "config.example.json" to "config.json" and modify it.
+	// It looks like this:
+	// {
+	//    "access_key_id":"testId",
+	//    "access_key_secret":"testSecret",
+	//    "phone_numbers":["15300000001"],
+	//    "sign_name":"阿里云短信测试专用",
+	//    "template_code":"SMS_71390007",
+	//    "template_param":"{\"code\":\"888888\"}"
+	//}
 	if err = loadConfig("config.json", &config); err != nil {
 		log.Printf("loadConfig() error: %v", err)
 		return

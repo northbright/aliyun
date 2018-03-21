@@ -7,7 +7,7 @@
 
 #### Example of Sending SMS
 
-    // Creates a new client.
+    // Create a new client.
     c := sms.NewClient(accessKeyID, accessKeySecret)
 
     // Specify one or more phone numbers.

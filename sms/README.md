@@ -5,7 +5,7 @@
 
 [Golang](https://golang.org) SDK for [aliyun SMS service](https://www.aliyun.com/product/sms).
 
-#### Example
+#### Example of Sending SMS
 
     c := sms.NewClient(accessKeyID, accessKeySecret)
     numbers := []string{"13800138000"}

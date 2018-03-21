@@ -175,9 +175,10 @@ func (c *Client) SignedString() string {
 // It returns success status, response and error.
 //
 // For example:
+//
 // c := sms.NewClient(accessKeyID, accessKeySecret)
-// numbers := []string{"13800138000"}
-// ok, resp, err := c.Send(numbers, "my_product", "SMS_0000", `{"code":"1234","product":"ytx"}`)
+//
+// ok, resp, err := c.Send([]string{"13800138000"}, "my_product", "SMS_0000", `{"code":"1234","product":"ytx"}`)
 func (c *Client) Send(phoneNumbers []string, signName, templateCode, templateParam string, params ...Param) (bool, *Response, error) {
 	// Set default common parameters
 	c.SetTimestamp(time.Now())

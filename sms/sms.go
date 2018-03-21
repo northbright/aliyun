@@ -118,7 +118,6 @@ func (sms *SMS) SignedString() string {
 	mac.Write([]byte(str))
 
 	sign := base64.StdEncoding.EncodeToString(mac.Sum(nil))
-	sign = url.QueryEscape(sign)
 	return SpecialURLEncode(sign)
 }
 

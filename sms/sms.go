@@ -146,11 +146,16 @@ func (sms *SMS) Send(phoneNumbers []string, signName, templateCode, templatePara
 	sms.Params["TemplateCode"] = templateCode
 	sms.Params["TemplateParam"] = templateParam
 
-	// Get signed string
+	// Get signature
 	sign := sms.SignedString()
+
+	// Get query string
 	sortedQueryStr := sms.SortedQueryStr()
+
+	// Make final query string with signature
 	rawQuery := fmt.Sprintf("Signature=%s&%s", sign, sortedQueryStr)
 
+	// New a URL with host, raw query
 	u := &url.URL{
 		Scheme:   "http",
 		Host:     "dysmsapi.aliyuncs.com",

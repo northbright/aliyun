@@ -31,8 +31,8 @@ func Example() {
 		return
 	}
 
-	sms := sms.New(config.AccessKeyID, config.AccessKeySecret)
-	ok, resp, err := sms.Send(config.PhoneNumbers,
+	client := sms.NewClient(config.AccessKeyID, config.AccessKeySecret)
+	ok, resp, err := client.Send(config.PhoneNumbers,
 		config.SignName,
 		config.TemplateCode,
 		config.TemplateParam,

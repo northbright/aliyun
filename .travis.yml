@@ -9,17 +9,9 @@ go:
 before_install:
 
 install:
-  - wget http://downloads.sourceforge.net/libxls/libxls-0.2.0.tar.gz
-  - tar -xzvf libxls-0.2.0.tar.gz
-  - cd libxls-0.2.0
-  - ./configure --prefix=$HOME
-  - make
-  - make install
-  - go get github.com/northbright/pathhelper
+  - go get github.com/northbright/uuid
 
 before_script:
-  - export LD_LIBRARY_PATH="$HOME/lib":$LD_LIBRARY_PATH
 
 script:
-  - cd ../xls2csv
-  - CGO_CFLAGS="-I$HOME/include" CGO_LDFLAGS="-L$HOME/lib -lxlsreader" go test -c && ./xls2csv.test
+  - go test -v ./...

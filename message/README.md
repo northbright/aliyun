@@ -12,7 +12,7 @@ message is a [Golang](https://golang.org) SDK for aliyun message services(阿里
 #### Example of Sending SMS
 
     // Create a new client.
-    c := messgae.NewClient(accessKeyID, accessKeySecret)
+    c := message.NewClient(accessKeyID, accessKeySecret)
 
     // Specify one or more phone numbers.
     numbers := []string{"13800138000"}

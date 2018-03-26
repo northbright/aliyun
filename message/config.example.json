@@ -1,8 +1,16 @@
 {
-    "access_key_id":"testId",
-    "access_key_secret":"testSecret",
-    "phone_numbers":["15300000001"],
-    "sign_name":"阿里云短信测试专用",
-    "template_code":"SMS_71390007",
-    "template_param":"{\"code\":\"888888\"}"
+    "access_key_id":"test_key_id",
+    "access_key_secret":"test_key_secret",
+    "sms": {
+        "phone_numbers":["13800138000"],
+        "sign_name":"测试签名",
+        "template_code":"SMS_0000",
+        "template_param":"{\"code\":\"888888\"}"
+    },
+    "single_call_by_tts": {
+	"called_show_number":"025000000",
+	"called_number":"13800138000",
+	"template_code":"TTS_0000",
+	"template_param":"{\"code\":\"888888\"}"
+    }
 }

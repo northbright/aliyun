@@ -9,13 +9,25 @@ import (
 	"github.com/northbright/aliyun/message"
 )
 
+type SMSConfig struct {
+	PhoneNumbers  []string `json:"phone_numbers"`
+	SignName      string   `json:"sign_name"`
+	TemplateCode  string   `json:"template_code"`
+	TemplateParam string   `json:"template_param"`
+}
+
+type SingleCallByTTSConfig struct {
+	CalledShowNumber string `json:"called_show_number"`
+	CalledNumber     string `json:"called_number"`
+	TemplateCode     string `json:"template_code"`
+	TemplateParam    string `json:"template_param"`
+}
+
 type Config struct {
-	AccessKeyID     string   `json:"access_key_id"`
-	AccessKeySecret string   `json:"access_key_secret"`
-	PhoneNumbers    []string `json:"phone_numbers"`
-	SignName        string   `json:"sign_name"`
-	TemplateCode    string   `json:"template_code"`
-	TemplateParam   string   `json:"template_param"`
+	AccessKeyID     string                `json:"access_key_id"`
+	AccessKeySecret string                `json:"access_key_secret"`
+	SMS             SMSConfig             `json:"sms"`
+	SingleCallByTTS SingleCallByTTSConfig `json:"single_call_by_tts"`
 }
 
 func Example() {
@@ -27,13 +39,21 @@ func Example() {
 	// Load config from file.
 	// You may rename "config.example.json" to "config.json" and modify it.
 	// It looks like this:
-	// {
-	//    "access_key_id":"testId",
-	//    "access_key_secret":"testSecret",
-	//    "phone_numbers":["15300000001"],
-	//    "sign_name":"阿里云短信测试专用",
-	//    "template_code":"SMS_71390007",
-	//    "template_param":"{\"code\":\"888888\"}"
+	//{
+	//    "access_key_id":"test_key_id",
+	//    "access_key_secret":"test_key_secret",
+	//    "sms": {
+	//        "phone_numbers":["13800138000"],
+	//        "sign_name":"测试签名",
+	//        "template_code":"SMS_0000",
+	//        "template_param":"{\"code\":\"888888\"}"
+	//    },
+	//    "single_call_by_tts": {
+	//        "called_show_number":"025000000",
+	//        "called_number":"13800138000",
+	//        "template_code":"TTS_0000",
+	//        "template_param":"{\"code\":\"888888\"}"
+	//    }
 	//}
 	if err = loadConfig("config.json", &config); err != nil {
 		log.Printf("loadConfig() error: %v", err)
@@ -43,17 +63,32 @@ func Example() {
 	// Creates a new client.
 	client := message.NewClient(config.AccessKeyID, config.AccessKeySecret)
 	log.Printf("client: %v", client)
+
 	// Send SMS.
-	ok, resp, err := client.SendSMS(config.PhoneNumbers,
-		config.SignName,
-		config.TemplateCode,
-		config.TemplateParam,
+	ok, smsResp, err := client.SendSMS(
+		config.SMS.PhoneNumbers,
+		config.SMS.SignName,
+		config.SMS.TemplateCode,
+		config.SMS.TemplateParam,
 	)
 	if err != nil {
 		log.Printf("SendSMS() error: %v", err)
 		return
 	}
-	log.Printf("SendSMS() ok: %v, response: %v", ok, resp)
+	log.Printf("SendSMS() ok: %v, response: %v", ok, smsResp)
+
+	// Make Single Call by TTS.
+	ok, vmsResp, err := client.MakeSingleCallByTTS(
+		config.SingleCallByTTS.CalledShowNumber,
+		config.SingleCallByTTS.CalledNumber,
+		config.SingleCallByTTS.TemplateCode,
+		config.SingleCallByTTS.TemplateParam,
+	)
+	if err != nil {
+		log.Printf("MakeSingleCallByTTS() error: %v", err)
+		return
+	}
+	log.Printf("MakeSingleCallByTTS() ok: %v, response: %v", ok, vmsResp)
 
 	// Output:
 }

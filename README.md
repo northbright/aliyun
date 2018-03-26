@@ -5,4 +5,7 @@ This repository hosts [Golang](https://golang.org) packages for [aliyun services
 #### Packages
 * [message](message)
 
-  message is a [Golang](https://golang.org) SDK for [aliyun SMS message services(阿里云通信服务)](https://www.aliyun.com/product/message).
+  message is a [Golang](https://golang.org) SDK for aliyun message services(阿里云通信服务).
+
+#### License
+* [MIT License](LICENSE)

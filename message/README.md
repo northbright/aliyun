@@ -1,9 +1,13 @@
-# sms
+# message
 
 [![Build Status](https://travis-ci.org/northbright/aliyun.svg?branch=master)](https://travis-ci.org/northbright/aliyun)
 [![GoDoc](https://godoc.org/github.com/northbright/aliyun/message?status.svg)](https://godoc.org/github.com/northbright/aliyun/message)
 
-message is a [Golang](https://golang.org) SDK for [aliyun SMS message services(阿里云通信服务)](https://www.aliyun.com/product/message).
+message is a [Golang](https://golang.org) SDK for aliyun message services(阿里云通信服务).
+
+#### Supported Services
+* [SMS(短消息服务)](https://www.aliyun.com/product/sms)
+* [Voice service(语音服务)](https://www.aliyun.com/product/sms)
 
 #### Example of Sending SMS
 

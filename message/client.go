@@ -100,7 +100,7 @@ func (c *Client) SignedString(httpMethod, sortedQueryStr string) string {
 //
 // c := message.NewClient(accessKeyID, accessKeySecret)
 //
-// ok, resp, err := c.Send([]string{"13800138000"}, "my_product", "SMS_0000", `{"code":"1234","product":"ytx"}`)
+// ok, resp, err := c.SendSMS([]string{"13800138000"}, "my_product", "SMS_0000", `{"code":"1234","product":"ytx"}`)
 func (c *Client) SendSMS(phoneNumbers []string, signName, templateCode, templateParam string, params ...Param) (bool, *SMSResponse, error) {
 	v := url.Values{}
 	// Set default common parameters for aliyun services.

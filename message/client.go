@@ -30,16 +30,25 @@ type Client struct {
 	accessKeySecret string
 }
 
+// Response is the common response for aliyun message services APIs.
+type Response struct {
+	// RequestID is the request ID. e.g. "8906582E-6722".
+	RequestID string `json:"RequestId"` // Code is the status code. e.g. "OK", "SignatureDoesNotMatch".
+	Code      string `json:"Code"`      // Message is the detail message for the status code. e.g. "OK", Specified signature is not matched with our calculation...".
+	Message   string `json:"Message"`
+	// BizID is the business ID. It can be used to query the status of SMS. e.g. "134523^4351232".
+}
+
 // SMSResponse is the response of HTTP request of sending SMS.
 type SMSResponse struct {
-	// RequestID is the request ID. e.g. "8906582E-6722".
-	RequestID string `json:"RequestId"`
-	// Code is the status code. e.g. "OK", "SignatureDoesNotMatch".
-	Code string `json:"Code"`
-	// Message is the detail message for the status code. e.g. "OK", Specified signature is not matched with our calculation...".
-	Message string `json:"Message"`
-	// BizID is the business ID. It can be used to query the status of SMS. e.g. "134523^4351232".
+	Response
 	BizID string `json:"BizId"`
+}
+
+// SingleCallByTTSResponse is the response of HTTP request of make single call by TTS.
+type SingleCallByTTSResponse struct {
+	Response
+	CallID string `json:"CallId"`
 }
 
 // NewClient creates a new client.

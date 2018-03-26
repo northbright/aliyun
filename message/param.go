@@ -64,7 +64,7 @@ func OutID(ID string) Param {
 }
 
 // Volume specifies the call volumn.
-// It's 100 by default if no one specified.
+// Range: 0 - 200. It's 100 by default if no one specified.
 func Volume(volume int) Param {
 	return Param{f: func(v url.Values) { v.Set("Volume", strconv.Itoa(volume)) }}
 }

@@ -3,6 +3,6 @@
 This repository hosts [Golang](https://golang.org) packages for [aliyun services(阿里云)](https://aliyun.com).
 
 #### Packages
-* [sms](./sms)
+* [message](message)
 
-  [Golang](https://golang.org) SDK for [aliyun SMS service(阿里云-短信服务)](https://www.aliyun.com/product/sms)
+  message is a [Golang](https://golang.org) SDK for [aliyun SMS message services(阿里云通信服务)](https://www.aliyun.com/product/message).

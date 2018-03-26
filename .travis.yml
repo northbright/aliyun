@@ -14,5 +14,5 @@ install:
 before_script:
 
 script:
-  - cd ./sms
+  - cd ./message
   - go test -v ./...

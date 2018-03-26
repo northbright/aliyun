@@ -3,6 +3,7 @@ package message
 import (
 	"fmt"
 	"net/url"
+	"strconv"
 	"time"
 )
 
@@ -55,6 +56,23 @@ func Version(ver string) Param {
 // It's "cn-hangzhou" by default if no one specified.
 func RegionID(ID string) Param {
 	return Param{f: func(v url.Values) { v.Set("RegionId", ID) }}
+}
+
+// OutID specifies the caller's out ID.
+func OutID(ID string) Param {
+	return Param{f: func(v url.Values) { v.Set("OutId", ID) }}
+}
+
+// Volume specifies the call volumn.
+// It's 100 by default if no one specified.
+func Volume(volume int) Param {
+	return Param{f: func(v url.Values) { v.Set("Volume", strconv.Itoa(volume)) }}
+}
+
+// PlayTimes specifies the play times of the voice message.
+// It's 1 by default if no one specified.
+func PlayTimes(n int) Param {
+	return Param{f: func(v url.Values) { v.Set("PlayTimes", strconv.Itoa(n)) }}
 }
 
 // PhoneNumbers specifies the phone numbers to send SMS.

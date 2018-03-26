@@ -7,7 +7,7 @@ message is a [Golang](https://golang.org) SDK for aliyun message services(阿里
 
 #### Supported Services
 * [SMS(短消息服务)](https://www.aliyun.com/product/sms)
-* [Voice service(语音服务)](https://www.aliyun.com/product/vms)
+* [Voice Messaging Service(语音服务)](https://www.aliyun.com/product/vms)
 
 #### Example of Sending SMS
 

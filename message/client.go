@@ -67,6 +67,20 @@ func SpecialURLEncode(str string) string {
 	return encodedStr
 }
 
+// SetDefaultCommonParams sets the default common parameters for aliyun services.
+func (c *Client) SetDefaultCommonParams(v url.Values) {
+	// Set access key ID.
+	v.Set("AccessKeyId", c.accessKeyID)
+
+	// Set default common parameters
+	v.Set("Timestamp", GenTimestamp(time.Now()))
+	v.Set("Format", "JSON")
+	v.Set("SignatureMethod", "HMAC-SHA1")
+	v.Set("SignatureVersion", "1.0")
+	UUID, _ := uuid.New()
+	v.Set("SignatureNonce", UUID)
+}
+
 // SignedString follow aliyun's POP protocol to generate the signature.
 // httpMethod: follow aliyun doc. e.g. "GET" for sending SMS and single TTS call.
 func (c *Client) SignedString(httpMethod, sortedQueryStr string) string {
@@ -244,18 +258,4 @@ func (c *Client) MakeSingleCallByTTS(calledShowNumber, calledNumber, ttsCode, tt
 		return false, response, nil
 	}
 	return true, response, nil
-}
-
-// SetDefaultCommonParams sets the default common parameters for aliyun services.
-func (c *Client) SetDefaultCommonParams(v url.Values) {
-	// Set access key ID.
-	v.Set("AccessKeyId", c.accessKeyID)
-
-	// Set default common parameters
-	v.Set("Timestamp", GenTimestamp(time.Now()))
-	v.Set("Format", "JSON")
-	v.Set("SignatureMethod", "HMAC-SHA1")
-	v.Set("SignatureVersion", "1.0")
-	UUID, _ := uuid.New()
-	v.Set("SignatureNonce", UUID)
 }

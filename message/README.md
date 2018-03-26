@@ -1,14 +1,14 @@
 # sms
 
 [![Build Status](https://travis-ci.org/northbright/aliyun.svg?branch=master)](https://travis-ci.org/northbright/aliyun)
-[![GoDoc](https://godoc.org/github.com/northbright/aliyun/sms?status.svg)](https://godoc.org/github.com/northbright/aliyun/sms)
+[![GoDoc](https://godoc.org/github.com/northbright/aliyun/message?status.svg)](https://godoc.org/github.com/northbright/aliyun/message)
 
-[Golang](https://golang.org) SDK for [aliyun SMS service(阿里云-短信服务)](https://www.aliyun.com/product/sms).
+message is a [Golang](https://golang.org) SDK for [aliyun SMS message services(阿里云通信服务)](https://www.aliyun.com/product/message).
 
 #### Example of Sending SMS
 
     // Create a new client.
-    c := sms.NewClient(accessKeyID, accessKeySecret)
+    c := messgae.NewClient(accessKeyID, accessKeySecret)
 
     // Specify one or more phone numbers.
     numbers := []string{"13800138000"}
@@ -17,7 +17,7 @@
     ok, resp, err := c.Send(numbers, "my_product", "SMS_0000", `{"code":"1234","product":"ytx"}`)
 
 #### Documentation
-* [API References](https://godoc.org/github.com/northbright/aliyun/sms)
+* [API References](https://godoc.org/github.com/northbright/aliyun/message)
 
 #### License
 * [MIT License](../LICENSE)

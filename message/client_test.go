@@ -1,4 +1,4 @@
-package sms_test
+package message_test
 
 import (
 	"encoding/json"
@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 
-	"github.com/northbright/aliyun/sms"
+	"github.com/northbright/aliyun/message"
 )
 
 type Config struct {
@@ -41,18 +41,19 @@ func Example() {
 	}
 
 	// Creates a new client.
-	client := sms.NewClient(config.AccessKeyID, config.AccessKeySecret)
+	client := message.NewClient(config.AccessKeyID, config.AccessKeySecret)
+	log.Printf("client: %v", client)
 	// Send SMS.
-	ok, resp, err := client.Send(config.PhoneNumbers,
+	ok, resp, err := client.SendSMS(config.PhoneNumbers,
 		config.SignName,
 		config.TemplateCode,
 		config.TemplateParam,
 	)
 	if err != nil {
-		log.Printf("Send() error: %v", err)
+		log.Printf("SendSMS() error: %v", err)
 		return
 	}
-	log.Printf("ok: %v, response: %v", ok, resp)
+	log.Printf("SendSMS() ok: %v, response: %v", ok, resp)
 
 	// Output:
 }

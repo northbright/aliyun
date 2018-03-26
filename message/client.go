@@ -168,6 +168,88 @@ func (c *Client) SendSMS(phoneNumbers []string, signName, templateCode, template
 
 }
 
+// MakeSingleCallByTTS makes the single call by TTS.
+//
+// calledShowNumber: called show number to users. It can be purchased at aliyun's control panel.
+// calledNumber: phone number to make single call.
+// ttsCode: permitted TTS template code. You may apply one or more template code in aliyun's control panel.
+// ttsParam: JSON to render the template. e.g. {"code":"1234","product":"ytx"}.
+// params: optional parameters for sending SMS. In most case, no need to pass params.
+// You may also specify params by helper functions. e.g. Timestamp(), SignatureNonce().
+//
+// It returns success status, response and error.
+//
+// For example:
+//
+// c := message.NewClient(accessKeyID, accessKeySecret)
+//
+// ok, resp, err := c.MakeSingleCallByTTS("02560000000", "1500000000", "TTS_0000", `{"code":"1234","product":"ytx"}`)
+func (c *Client) MakeSingleCallByTTS(calledShowNumber, calledNumber, ttsCode, ttsParam string, params ...Param) (bool, *SingleCallByTTSResponse, error) {
+	v := url.Values{}
+	// Set default common parameters for aliyun services.
+	c.SetDefaultCommonParams(v)
+
+	// Set default business parameters for sending SMS.
+	v.Set("Action", "SingleCallByTts")
+	v.Set("Version", "2017-05-25")
+	v.Set("RegionId", "cn-hangzhou")
+
+	// Set required business parameters
+	v.Set("CalledShowNumber", calledShowNumber)
+	v.Set("CalledNumber", calledNumber)
+	v.Set("TtsCode", ttsCode)
+	v.Set("TtsParam", ttsParam)
+
+	// Override parameters if need.
+	for _, param := range params {
+		param.f(v)
+	}
+
+	// Get sorted query string by keys.
+	sortedQueryStr := v.Encode()
+
+	// Get signature.
+	sign := c.SignedString("GET", sortedQueryStr)
+
+	// Make final query string with signature.
+	rawQuery := fmt.Sprintf("Signature=%s&%s", sign, sortedQueryStr)
+
+	// New a URL with host, raw query.
+	u := &url.URL{
+		Scheme:   "http",
+		Host:     APIHost,
+		Path:     "/",
+		RawQuery: rawQuery,
+	}
+
+	req, err := http.NewRequest("GET", u.String(), nil)
+	if err != nil {
+		return false, nil, err
+	}
+
+	resp, err := c.Do(req)
+	if err != nil {
+		return false, nil, err
+	}
+	defer resp.Body.Close()
+
+	buf, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return false, nil, err
+	}
+
+	// Parse JSON response
+	response := &SingleCallByTTSResponse{}
+	if err = json.Unmarshal(buf, response); err != nil {
+		return false, nil, err
+	}
+
+	if strings.ToUpper(response.Code) != "OK" {
+		return false, response, nil
+	}
+	return true, response, nil
+}
+
 // SetDefaultCommonParams sets the default common parameters for aliyun services.
 func (c *Client) SetDefaultCommonParams(v url.Values) {
 	// Set access key ID.

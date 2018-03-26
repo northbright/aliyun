@@ -15,10 +15,6 @@ import (
 	"github.com/northbright/uuid"
 )
 
-var (
-	APIHost = "dysmsapi.aliyuncs.com"
-)
-
 // Client is used to make HTTP requests of aliyun API message serviices.
 // A client should be resused to send SMS, make single TTS call...
 type Client struct {
@@ -134,7 +130,7 @@ func (c *Client) SendSMS(phoneNumbers []string, signName, templateCode, template
 	// New a URL with host, raw query.
 	u := &url.URL{
 		Scheme:   "http",
-		Host:     APIHost,
+		Host:     "dysmsapi.aliyuncs.com",
 		Path:     "/",
 		RawQuery: rawQuery,
 	}
@@ -217,7 +213,7 @@ func (c *Client) MakeSingleCallByTTS(calledShowNumber, calledNumber, ttsCode, tt
 	// New a URL with host, raw query.
 	u := &url.URL{
 		Scheme:   "http",
-		Host:     APIHost,
+		Host:     "dyvmsapi.aliyuncs.com",
 		Path:     "/",
 		RawQuery: rawQuery,
 	}

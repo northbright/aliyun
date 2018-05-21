@@ -17,7 +17,7 @@ message is a [Golang](https://golang.org) SDK for aliyun message services(阿里
     // Specify one or more phone numbers.
     numbers := []string{"13800138000"}
     
-    // Pass phone numbers, signature name, template code, template param(JSON) to Send().
+    // Pass phone numbers, signature name, template code, template param(JSON) to SendSMS().
     ok, resp, err := c.SendSMS(numbers, "my_product", "SMS_0000", `{"code":"1234","product":"ytx"}`)
 
 #### Documentation
